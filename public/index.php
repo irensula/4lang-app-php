@@ -7,25 +7,18 @@ $route = explode("?", $_SERVER["REQUEST_URI"])[0];
 $method = strtolower($_SERVER["REQUEST_METHOD"]);
 
 // require_once 'libraries/auth.php';
-// require_once 'controllers/userManagement.php';
-// require_once 'controllers/recipeManagement.php';
+require_once 'controllers/userManagement.php';
 
 switch($route) {
+    case "/home":
     case "/":
-      require '.././views/home.view.php';
-    break;
-    
     case '' :
       require '.././views/home.view.php';
     break;
 
-    case "/home":
-      require '.././views/home.view.php';
+    case "/login":
+        loginController();
     break;
-
-    // case "/recipes":
-    //     viewRecipesController();
-    // break;
 
     // case "/update_recipe":
     //   if(isLoggedIn()){

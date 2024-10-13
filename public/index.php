@@ -16,8 +16,12 @@ switch($route) {
       require '.././views/home.view.php';
     break;
 
+    case "/register":
+      registerController();
+    break;
+
     case "/login":
-        loginController();
+      loginController();
     break;
 
     // case "/update_recipe":

@@ -14,7 +14,7 @@ function connect() {
         $user = 'root'; 
         $password = ''; 
 
-        $connectionString = "mysql:host=$host;dbname=$dbname;port=$port;charset=utf8";
+        $connectionString = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
         try {       
                 $pdo = new PDO($connectionString, $user, $password);

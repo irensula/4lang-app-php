@@ -12,3 +12,16 @@ function addUser($fName, $lName, $email, $password){
     return $stm->execute($data);
 }
 
+function login($email, $password) {
+    $pdo = connect();
+    $data = [$email, $password];
+    $sql = "SELECT * FROM user WHERE email = ?";
+    $stm=$pdo->prepare($sql);
+    $stm->execute([$enail]);
+    $user = $stm->fetch(PDO::FETCH_ASSOC);
+    $hashedpassword = $user['password'];
+    if($hashedpassword && password_verify($password, $hashedpassword))
+        return $user;
+    else
+        return false;
+}

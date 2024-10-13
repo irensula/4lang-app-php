@@ -21,13 +21,22 @@ function registerController() {
 
 function loginController() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if(isset($_POST['fName'])) {
-            $fName = cleanUpInput($_POST['fName']);
-            require 'views/login.view.php';
+        if(isset($_POST['email'], $_POST['password'])) {
+            $email = cleanUpInput($_POST['email']);
+            $password = cleanUpInput($_POST['password']);
+            $result = login($email, $password);
+
+            if($result){
+                $_SESSION['email'] = $result['email'];
+                $_SESSION['userID'] = $result['userID'];
+                $_SESSION['session_id'] = session_id();
+                header("Location: /"); 
+                require 'views/login.view.php';
+            } else {
+                echo "Email and password are required!";
+            } 
         } else {
-            echo "First name is required!";
-        } 
-    } else {
-        require 'views/login.view.php';
+            require 'views/login.view.php';
+        }
     }
 }

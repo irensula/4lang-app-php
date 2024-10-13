@@ -20,23 +20,30 @@ function registerController() {
 }
 
 function loginController() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['email'], $_POST['password'])) {
             $email = cleanUpInput($_POST['email']);
             $password = cleanUpInput($_POST['password']);
-            $result = login($email, $password);
-
+            $result = login($email, $password); 
             if($result){
                 $_SESSION['email'] = $result['email'];
                 $_SESSION['userID'] = $result['userID'];
                 $_SESSION['session_id'] = session_id();
                 header("Location: /"); 
-                require 'views/login.view.php';
+                exit();
             } else {
-                echo "Email and password are required!";
+                $errorMessage = "Email and password are required!";
+                require 'views/login.view.php';
             } 
+            } else {
+                $errorMessage = "Email and password are required!";
+                require 'views/login.view.php';
+            }
         } else {
-            require 'views/login.view.php';
-        }
-    }
+           require 'views/login.view.php';
+    } 
 }

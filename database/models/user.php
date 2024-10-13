@@ -14,14 +14,27 @@ function addUser($fName, $lName, $email, $password){
 
 function login($email, $password) {
     $pdo = connect();
-    $data = [$email, $password];
+
+    // Prepare and execute the query
     $sql = "SELECT * FROM user WHERE email = ?";
-    $stm=$pdo->prepare($sql);
-    $stm->execute([$enail]);
+    $stm = $pdo->prepare($sql);
+    $stm->execute([$email]);
+
+    // Fetch the user data
     $user = $stm->fetch(PDO::FETCH_ASSOC);
-    $hashedpassword = $user['password'];
-    if($hashedpassword && password_verify($password, $hashedpassword))
-        return $user;
-    else
+
+    // Debugging: Check if the user is found
+    if (!$user) {
+        echo "No user found with email: " . $email;
         return false;
+    }
+
+    // Check if password is verified
+    $hashedPassword = $user['password'];
+    if (password_verify($password, $hashedPassword)) {
+        return $user;
+    } else {
+        echo "Password verification failed!";
+        return false;
+    }
 }

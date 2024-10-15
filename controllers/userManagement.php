@@ -1,6 +1,7 @@
 <?php
 require_once "database/models/user.php";
 require_once "../libraries/cleaners.php";
+require_once "../libraries/auth.php";
 
 function registerController() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,4 +47,13 @@ function loginController() {
         } else {
            require 'views/login.view.php';
     } 
+}
+
+function logoutController(){
+    session_unset(); //poistaa kaikki muuttujat
+    session_destroy();
+    setcookie(session_name(),'',0,'/'); //poistaa evästeen selaimesta
+    session_regenerate_id(true);
+    header("Location: /login"); // forward eli uudelleenohjaus
+    die();
 }

@@ -24,6 +24,10 @@ switch($route) {
       loginController();
     break;
 
+    case "/logout":
+      logoutController();
+    break;
+    
     // case "/update_recipe":
     //   if(isLoggedIn()){
     //     if($method == "get"){

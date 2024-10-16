@@ -57,3 +57,11 @@ function logoutController(){
     header("Location: /login"); // forward eli uudelleenohjaus
     die();
 }
+
+function viewUserPageController(){
+    if(isset($_SESSION['userID'])){
+        $id = $_SESSION['userID'];
+        $userInfo = getUserById($id);
+        require "views/userProfile.view.php";    
+    }
+}

@@ -56,3 +56,11 @@ function login($email, $password) {
     }
 }
 
+function getUserById($id){
+    $pdo = connectDB();
+    $sql = "SELECT * FROM user WHERE userID=?";
+    $stm= $pdo->prepare($sql);
+    $stm->execute([$id]);
+    $all = $stm->fetch(PDO::FETCH_ASSOC);
+    return $all;
+}

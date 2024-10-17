@@ -58,7 +58,7 @@ function logoutController(){
     die();
 }
 
-function viewUserPageController(){
+function profileController(){
     if(isset($_SESSION['userID'])){
         $id = $_SESSION['userID'];
         $userInfo = getUserById($id);

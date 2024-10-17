@@ -27,6 +27,10 @@ switch($route) {
     case "/logout":
       logoutController();
     break;
+
+    case "/profile":
+      profileController();
+    break;
     
     // case "/update_recipe":
     //   if(isLoggedIn()){

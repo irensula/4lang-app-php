@@ -9,6 +9,7 @@ $method = strtolower($_SERVER["REQUEST_METHOD"]);
 require_once 'libraries/auth.php';
 require_once 'controllers/userManagement.php';
 require_once 'controllers/lessonsManagement.php';
+require_once 'controllers/dashboardManagement.php';
 
 switch($route) {
     case "/home":
@@ -36,6 +37,11 @@ switch($route) {
     case "/lessons":
       lessonsController();
       // require '.././views/lessons.view.php';
+    break;
+
+    case "/dashboard":
+      // dashboardController();
+      require '.././views/dashboard.view.php';
     break;
     
     // case "/update_recipe":

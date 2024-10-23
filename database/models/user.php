@@ -57,7 +57,7 @@ function login($email, $password) {
 }
 
 function getUserById($id){
-    $pdo = connectDB();
+    $pdo = connect();
     $sql = "SELECT * FROM user WHERE userID=?";
     $stm= $pdo->prepare($sql);
     $stm->execute([$id]);
